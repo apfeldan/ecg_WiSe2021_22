@@ -2,7 +2,6 @@
 Repository for course "Echtzeit-Computergrafik" in winter term 2021 at HS Furtwangen University. 
 
 ## First meeting on 14.10.2021
-
 - Setup development environment
   - [Visual Studio Code](https://code.visualstudio.com/) with [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
   - Browser with WebGL support
