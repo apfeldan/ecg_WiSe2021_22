@@ -1,3 +1,14 @@
+/**
+ * Example Code #03 for ECG course
+ * Render a cube and let it rotate
+ *
+ * @summary WebGL implementation of a rotating cube
+ * @author Uwe Hahne, uwe.hahne@hs-furtwangen.de
+ *
+ * Created at     : 2021-11-03 15:25:45 
+ * Last modified  : 2021-11-03 15:26:56
+ */
+
 var cubeRotation = degToRad(45.0);
 
 main();
@@ -13,9 +24,6 @@ function main() {
     } else {
         console.log('WebGL is good to go');
     }
-
-    // initialize geometry
-    const buffers = initBuffers(gl);
 
     /*========== Shaders ==========*/
 
@@ -63,6 +71,49 @@ function main() {
         modelViewMatrix: gl.getUniformLocation(shaderProgram, 'uModelViewMatrix'),
         }
     };
+
+    // Initialize the geometry in vertex buffer objects 
+    const buffers = initBuffers(gl);
+
+    // Tell WebGL how to pull out the positions from the position
+    // buffer into the vertexPosition attribute
+    {
+        const numComponents = 3;
+        const type = gl.FLOAT;
+        const normalize = false;
+        const stride = 0;
+        const offset = 0;
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffers.position);
+        gl.vertexAttribPointer(
+            programInfo.attribLocations.vertexPosition,
+            numComponents,
+            type,
+            normalize,
+            stride,
+            offset);
+        gl.enableVertexAttribArray(
+            programInfo.attribLocations.vertexPosition);
+      }
+    
+      // Tell WebGL how to pull out the colors from the color buffer
+      // into the vertexColor attribute.
+      {
+        const numComponents = 4;
+        const type = gl.FLOAT;
+        const normalize = false;
+        const stride = 0;
+        const offset = 0;
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffers.color);
+        gl.vertexAttribPointer(
+            programInfo.attribLocations.vertexColor,
+            numComponents,
+            type,
+            normalize,
+            stride,
+            offset);
+        gl.enableVertexAttribArray(
+            programInfo.attribLocations.vertexColor);
+      }
 
     var then = 0;
 
@@ -304,45 +355,7 @@ function drawScene(gl, programInfo, buffers, deltaTime) {
                 cubeRotation * .7,// amount to rotate in radians
                 [0, 1, 0]);       // axis to rotate around (X)
   
-    // Tell WebGL how to pull out the positions from the position
-    // buffer into the vertexPosition attribute
-    {
-      const numComponents = 3;
-      const type = gl.FLOAT;
-      const normalize = false;
-      const stride = 0;
-      const offset = 0;
-      gl.bindBuffer(gl.ARRAY_BUFFER, buffers.position);
-      gl.vertexAttribPointer(
-          programInfo.attribLocations.vertexPosition,
-          numComponents,
-          type,
-          normalize,
-          stride,
-          offset);
-      gl.enableVertexAttribArray(
-          programInfo.attribLocations.vertexPosition);
-    }
-  
-    // Tell WebGL how to pull out the colors from the color buffer
-    // into the vertexColor attribute.
-    {
-      const numComponents = 4;
-      const type = gl.FLOAT;
-      const normalize = false;
-      const stride = 0;
-      const offset = 0;
-      gl.bindBuffer(gl.ARRAY_BUFFER, buffers.color);
-      gl.vertexAttribPointer(
-          programInfo.attribLocations.vertexColor,
-          numComponents,
-          type,
-          normalize,
-          stride,
-          offset);
-      gl.enableVertexAttribArray(
-          programInfo.attribLocations.vertexColor);
-    }
+    
   
     // Tell WebGL which indices to use to index the vertices
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffers.indices);
