@@ -12,7 +12,7 @@
  * @author Uwe Hahne, uwe.hahne@hs-furtwangen.de
  *
  * Created at     : 2021-11-03 15:34:32 
- * Last modified  : 2021-11-03 15:39:10
+ * Last modified  : 2021-11-03 16:41:35
  */
 
 
@@ -129,7 +129,7 @@ function main() {
         antialias: true
     })
     
-    // create and set the camera
+    // create and set the perspective camera
     const angleOfView = 55;
     const aspectRatio = canvas.clientWidth / canvas.clientHeight;
     const nearPlane = 0.1;
@@ -141,6 +141,22 @@ function main() {
         farPlane
     );
     camera.position.set(0, 8, 30);
+    // alternative orthographic
+    // const left = -10;
+    // const right = 10;
+    // const top = 10;
+    // const bottom = -20;
+    // const nearPlane = 0.1;
+    // const farPlane = 100;
+    // const camera = new THREE.OrthographicCamera(
+    //     left,
+    //     right,
+    //     top,
+    //     bottom,
+    //     nearPlane,
+    //     farPlane
+    // );
+    // camera.position.set(0, 8, 40);
 
     // create the scene
     const scene = new THREE.Scene();

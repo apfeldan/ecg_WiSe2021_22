@@ -6,7 +6,7 @@
  * @author Uwe Hahne, uwe.hahne@hs-furtwangen.de
  *
  * Created at     : 2021-11-03 15:25:45 
- * Last modified  : 2021-11-03 15:26:56
+ * Last modified  : 2021-11-03 18:16:06
  */
 
 var cubeRotation = degToRad(45.0);
@@ -39,8 +39,8 @@ function main() {
 
         void main() {
             gl_Position = uProjectionMatrix * uModelViewMatrix * aPosition;
-            vColor = aPosition; // RGB Cube
-            //vColor = aVertexColor; // Face colored cube
+            //vColor = aPosition; // RGB Cube
+            vColor = aVertexColor; // Face colored cube
         }
     `;
 
@@ -219,7 +219,7 @@ function initBuffers(gl) {
 
     const colorBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
   
     // Build the element array buffer; this specifies the indices
     // into the vertex arrays for each face's vertices.
@@ -322,7 +322,7 @@ function drawScene(gl, programInfo, buffers, deltaTime) {
     // and we only want to see objects between 0.1 units
     // and 100 units away from the camera.
   
-    const fieldOfView = 45 * Math.PI / 180;   // in radians
+    const fieldOfView = degToRad(45);   // in radians
     const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
     const zNear = 0.1;
     const zFar = 100.0;
@@ -335,26 +335,28 @@ function drawScene(gl, programInfo, buffers, deltaTime) {
                      aspect,
                      zNear,
                      zFar);
-  
+    
     // Set the drawing position to the "identity" point, which is
     // the center of the scene.
     const modelViewMatrix = mat4.create();
   
     // Now move the drawing position a bit to where we want to
-    // start drawing the square.
-  
+    // start drawing the cube.
     mat4.translate(modelViewMatrix,     // destination matrix
-                   modelViewMatrix,     // matrix to translate
-                   [-0.0, 0.0, -6.0]);  // amount to translate
-    mat4.rotate(modelViewMatrix,  // destination matrix
-                modelViewMatrix,  // matrix to rotate
-                cubeRotation,     // amount to rotate in radians
-                [0, 0, 1]);       // axis to rotate around (Z)
+                    modelViewMatrix,    // matrix to translate
+                    [0.0, 0.0, -6.0]);  // amount to translate
+    
+    // mat4.rotate(modelViewMatrix,  // destination matrix
+    //             modelViewMatrix,  // matrix to rotate
+    //             cubeRotation,     // amount to rotate in radians
+    //             [0, 0, 1]);       // axis to rotate around (Z)
     mat4.rotate(modelViewMatrix,  // destination matrix
                 modelViewMatrix,  // matrix to rotate
                 cubeRotation * .7,// amount to rotate in radians
                 [0, 1, 0]);       // axis to rotate around (X)
-  
+    mat4.translate(modelViewMatrix,     // destination matrix
+                modelViewMatrix,     // matrix to translate
+                [-0.5, -0.5, -0.5]);  // amount to translate
     
   
     // Tell WebGL which indices to use to index the vertices
