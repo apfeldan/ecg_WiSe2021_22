@@ -1,3 +1,15 @@
+/**
+ * Example Code #02 for ECG course
+ * Render two triangles (empty code)
+ *
+ * @summary WebGL implementation of two triangles
+ * @author Uwe Hahne, uwe.hahne (ät) hs-furtwangen.de
+ *
+ * Created at     : 2021-11-03 15:28:31 
+ * Last modified  : 2021-11-04 12:05:44
+ */
+
+
 main();
 function main() {
     /*========== Create a WebGL Context ==========*/

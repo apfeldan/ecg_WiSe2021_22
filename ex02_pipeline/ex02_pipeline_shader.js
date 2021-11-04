@@ -1,12 +1,12 @@
 /**
  * Example Code #02 for ECG course
- * Render two triangles (complete code)
+ * Render two triangles (modified shader)
  *
- * @summary WebGL implementation of two triangles
+ * @summary WebGL implementation of two triangles with some exemplary shader modification
  * @author Uwe Hahne, uwe.hahne (ät) hs-furtwangen.de
  *
- * Created at     : 2021-11-03 15:30:54 
- * Last modified  : 2021-11-04 12:05:44
+ * Created at     : 2021-11-03 15:29:39 
+ * Last modified  : 2021-11-04 12:05:46
  */
 
 
@@ -81,15 +81,24 @@ function main() {
         precision mediump float;
         
         varying vec4 vFragColor;
+        vec4 mixColorVertical;
+        vec4 mixColorHorizontal;
 
         void main() {
-            gl_FragColor = vFragColor;
-            // if( mod(gl_FragCoord.x,10.0) < 5.0 ) {  
-            //     gl_FragColor = vFragColor;
-            // } else {
-            //     gl_FragColor = vec4(1.0,1.0,1.0,2.0) 
-            //                    - vFragColor;
-            // }              
+            // create a checkered shading
+            if( mod(gl_FragCoord.x,10.0) < 5.0 ) {  
+                mixColorHorizontal = vFragColor;
+            } else {
+                mixColorHorizontal = vec4(1.0,1.0,1.0,2.0) 
+                               - vFragColor;
+            }
+            if( mod(gl_FragCoord.y,10.0) < 5.0 ) {  
+                mixColorVertical = vFragColor;
+            } else {
+                mixColorVertical = vec4(1.0,1.0,1.0,2.0) 
+                               - vFragColor;
+            }
+            gl_FragColor = 0.6 * mixColorVertical + 0.4 * mixColorHorizontal;              
         }    
     `;
 
