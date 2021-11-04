@@ -3,10 +3,10 @@
  * Render a cube
  *
  * @summary WebGL implementation of a static cube
- * @author Uwe Hahne, uwe.hahne@hs-furtwangen.de
+ * @author Uwe Hahne, uwe.hahne (ät) hs-furtwangen.de
  *
  * Created at     : 2021-11-03 15:27:29 
- * Last modified  : 2021-11-03 18:17:04
+ * Last modified  : 2021-11-04 12:05:11
  */
 
 

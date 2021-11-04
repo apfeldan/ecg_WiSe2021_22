@@ -3,10 +3,10 @@
  * Render a cube and let it rotate
  *
  * @summary WebGL implementation of a rotating cube
- * @author Uwe Hahne, uwe.hahne@hs-furtwangen.de
+ * @author Uwe Hahne, uwe.hahne (ät) hs-furtwangen.de
  *
  * Created at     : 2021-11-03 15:25:45 
- * Last modified  : 2021-11-03 18:16:06
+ * Last modified  : 2021-11-04 12:04:55
  */
 
 var cubeRotation = degToRad(45.0);

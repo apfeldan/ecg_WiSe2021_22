@@ -3,10 +3,10 @@
  * Render two triangles (complete code)
  *
  * @summary WebGL implementation of two triangles
- * @author Uwe Hahne, uwe.hahne@hs-furtwangen.de
+ * @author Uwe Hahne, uwe.hahne (ät) hs-furtwangen.de
  *
  * Created at     : 2021-11-03 15:30:54 
- * Last modified  : 2021-11-03 15:31:14
+ * Last modified  : 2021-11-04 12:05:44
  */
 
 

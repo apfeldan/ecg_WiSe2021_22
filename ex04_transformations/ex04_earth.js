@@ -9,10 +9,10 @@
  * This code is meant to illustrate how transformations work.
  *
  * @summary Render some objects with THREE.js
- * @author Uwe Hahne, uwe.hahne@hs-furtwangen.de
+ * @author Uwe Hahne, uwe.hahne (ät) hs-furtwangen.de
  *
  * Created at     : 2021-11-03 15:34:32 
- * Last modified  : 2021-11-03 16:41:35
+ * Last modified  : 2021-11-04 12:05:13
  */
 
 
