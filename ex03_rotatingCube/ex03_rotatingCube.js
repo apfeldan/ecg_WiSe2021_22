@@ -10,6 +10,7 @@
  */
 
 var cubeRotation = degToRad(45.0);
+var time = 0.0;
 
 main();
 
@@ -34,13 +35,14 @@ function main() {
 
         uniform mat4 uModelViewMatrix;
         uniform mat4 uProjectionMatrix;
+        uniform float uTime;
 
         varying lowp vec4 vColor;
 
         void main() {
             gl_Position = uProjectionMatrix * uModelViewMatrix * aPosition;
             //vColor = aPosition; // RGB Cube
-            vColor = aVertexColor; // Face colored cube
+             vColor = vec4(1.0, abs(sin(uTime)), 0.0, 1.0); // Face colored cube
         }
     `;
 
@@ -69,6 +71,7 @@ function main() {
         uniformLocations: {
         projectionMatrix: gl.getUniformLocation(shaderProgram, 'uProjectionMatrix'),
         modelViewMatrix: gl.getUniformLocation(shaderProgram, 'uModelViewMatrix'),
+        time: gl.getUniformLocation(shaderProgram, 'uTime'),
         }
     };
 
@@ -352,7 +355,7 @@ function drawScene(gl, programInfo, buffers, deltaTime) {
     //             [0, 0, 1]);       // axis to rotate around (Z)
     mat4.rotate(modelViewMatrix,  // destination matrix
                 modelViewMatrix,  // matrix to rotate
-                cubeRotation * .7,// amount to rotate in radians
+                cubeRotation * 0.9,// amount to rotate in radians
                 [0, 1, 0]);       // axis to rotate around (X)
     mat4.translate(modelViewMatrix,     // destination matrix
                 modelViewMatrix,     // matrix to translate
@@ -374,7 +377,9 @@ function drawScene(gl, programInfo, buffers, deltaTime) {
         programInfo.uniformLocations.modelViewMatrix,
         false,
         modelViewMatrix);
-  
+    gl.uniform1f(
+      programInfo.uniformLocations.time,
+      time);
     {
       const vertexCount = 36;
       const type = gl.UNSIGNED_SHORT;
@@ -384,6 +389,7 @@ function drawScene(gl, programInfo, buffers, deltaTime) {
 
     // Update the rotation for the next draw
     cubeRotation += deltaTime;
+    time += deltaTime;
 }
 
 function degToRad(grad)
